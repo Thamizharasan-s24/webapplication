@@ -26,12 +26,12 @@ jobs:
         run: |
           ssh -o StrictHostKeyChecking=no ubuntu@44.202.135.193 << 'EOF'
             cd ~/app || mkdir -p ~/app && cd ~/app
-            if [ -d "cicd" ]; then
-              cd cicd
+            if [ -d "webapplication" ]; then
+              cd webapplication
               git pull origin main
             else
               git clone https://github.com/Thamizharasan-s24/webapplication.git
-              cd cicd
+              cd webapplication
             fi
             chmod +x build.sh test.sh deploy.sh
             ./build.sh

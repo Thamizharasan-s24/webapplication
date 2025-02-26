@@ -19,22 +19,29 @@ jobs:
           echo "${{ secrets.EC2_SSH_KEY }}" | tr -d '\r' > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan -H 44.202.135.193 >> ~/.ssh/known_hosts
-          eval "$(ssh-agent -s)"
-          ssh-add ~/.ssh/id_rsa
 
       - name: Deploy to EC2
         run: |
           ssh -o StrictHostKeyChecking=no ubuntu@44.202.135.193 << 'EOF'
+            # Navigate to the application directory or create it
             cd ~/app || mkdir -p ~/app && cd ~/app
+
+            # Check if the repo exists, then pull the latest changes
             if [ -d "webapplication" ]; then
               cd webapplication
+              git reset --hard  # Ensures a clean working directory
               git pull origin main
             else
               git clone https://github.com/Thamizharasan-s24/webapplication.git
               cd webapplication
             fi
+
+            # Ensure scripts are executable
             chmod +x build.sh test.sh deploy.sh
+
+            # Run the CI/CD steps
             ./build.sh
             ./test.sh
             ./deploy.sh
-         EOF
+          EOF
+

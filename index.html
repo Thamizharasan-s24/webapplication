@@ -3,44 +3,83 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome to My Web App</title>
+    <title>Modern Web App</title>
     <style>
         /* Google Font */
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
 
-        body {
+        /* Reset Styles */
+        * {
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
             font-family: 'Poppins', sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
             background: linear-gradient(135deg, #667eea, #764ba2);
             color: white;
             text-align: center;
         }
 
-        .container {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        /* Navigation Bar */
+        nav {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 15px;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            backdrop-filter: blur(10px);
         }
 
-        h1 {
-            font-size: 2rem;
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
         }
 
-        p {
+        nav ul li {
+            display: inline;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
             font-size: 1.2rem;
+            transition: 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #ff7eb3;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            padding: 20px;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
         }
 
         .btn {
             display: inline-block;
-            margin-top: 20px;
-            padding: 10px 20px;
-            font-size: 1rem;
+            padding: 12px 25px;
+            font-size: 1.2rem;
             font-weight: bold;
             color: white;
             background: #ff7eb3;
@@ -52,13 +91,127 @@
         .btn:hover {
             background: #ff4a91;
         }
+
+        /* Features Section */
+        .features {
+            padding: 60px 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            margin: 40px auto;
+            width: 80%;
+        }
+
+        .features h2 {
+            margin-bottom: 20px;
+        }
+
+        .features p {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 60px 20px;
+        }
+
+        .contact input, .contact textarea {
+            width: 80%;
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
+        }
+
+        .contact button {
+            padding: 10px 20px;
+            font-size: 1rem;
+            font-weight: bold;
+            color: white;
+            background: #ff7eb3;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .contact button:hover {
+            background: #ff4a91;
+        }
+
+        /* Footer */
+        footer {
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.3);
+        }
+
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>🚀 Welcome to My Web App!</h1>
-        <p>This is a simple yet modern web page.</p>
-        <a href="#" class="btn">Get Started</a>
-    </div>
+
+    <!-- Navigation -->
+    <nav>
+        <ul>
+            <li><a href="#hero">Home</a></li>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <h1>🚀 Welcome to My Modern Web App</h1>
+        <p>Beautiful, responsive, and fully functional.</p>
+        <a href="#features" class="btn">Explore Features</a>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <h2>🔥 Features</h2>
+        <p>✅ Modern & Responsive Design</p>
+        <p>✅ Smooth Scrolling Navigation</p>
+        <p>✅ Interactive Contact Form</p>
+        <p>✅ One-File Simplicity</p>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <h2>📧 Contact Us</h2>
+        <form id="contactForm">
+            <input type="text" id="name" placeholder="Your Name" required><br>
+            <input type="email" id="email" placeholder="Your Email" required><br>
+            <textarea id="message" rows="4" placeholder="Your Message" required></textarea><br>
+            <button type="submit">Send Message</button>
+        </form>
+        <p id="responseMsg"></p>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2025 My Web App. All Rights Reserved.</p>
+    </footer>
+
+    <!-- JavaScript for Contact Form -->
+    <script>
+        document.getElementById("contactForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            
+            // Get input values
+            let name = document.getElementById("name").value;
+            let email = document.getElementById("email").value;
+            let message = document.getElementById("message").value;
+            
+            // Simulated response
+            let responseMessage = "Thank you, " + name + "! Your message has been received.";
+            
+            // Show response
+            document.getElementById("responseMsg").textContent = responseMessage;
+            
+            // Clear form
+            document.getElementById("contactForm").reset();
+        });
+    </script>
+
 </body>
 </html>
+
